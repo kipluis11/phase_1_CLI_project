@@ -11,14 +11,15 @@ class Cli
     def spell_book
         puts "Would you like to practice some magic?"   #this starts the interaction with the user and gives them a choice 
         user_input = gets.strip.downcase                #continue or exit the app.  It also calls on the spell data needed to present choices.
-        if user_input == "yes" || user_input == "y"
+        if user_input.downcase == "yes" || user_input.downcase == "y"
             sleep(1)
             puts "Summon the spell book!"
             display_spell_book_content
             ask_user_for_spell_choice
             
         else
-            puts "Be gone with you then!"
+            
+            puts "BE GONE WITH YOU THEN!"
         end
 
     end
@@ -26,18 +27,18 @@ class Cli
     def display_spell_book_content
         Spell.all.each.with_index do |spell, index|  #this method pulls the data from my @@all array and puts out the number and spell name. 
             
-           puts "#{index+1}. #{spell.name}"
+           puts "#{index + 1}. #{spell.name}"
 
         end
     end
 
     def ask_user_for_spell_choice
         index = gets.strip.to_i - 1
-        max_limit = Spell.all.length - 1        #this method set the limit of spells presented and also makes sure the user is selecting from the proper list. 
+        max_limit = Spell.all.length        #this method set the limit of spells presented and also makes sure the user is selecting from the proper list. 
        
         until index.between?(0,max_limit)
             puts "Do you have the right book?  Please try your selection again."
-            index = gets.strip.to_i - 1
+            index = gets.strip.to_i - 1 
         end
         spell_instance = Spell.all[index]
         show_spell_details(spell_instance)

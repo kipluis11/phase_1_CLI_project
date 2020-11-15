@@ -9,7 +9,7 @@ class Api
         response = Net::HTTP.get(uri)
        data = JSON.parse(response)
         
-        array_of_spells = data["results"][0..25]
+        array_of_spells = data["results"][0..26]
         
         array_of_spells.each do |hash|
             Spell.new(hash["index"], hash["name"], hash["url"])  
